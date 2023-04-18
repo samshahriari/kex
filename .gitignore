@@ -197,3 +197,5 @@ share/man/man1/ipython.1
 share/man/man1/isympy.1
 share/man/man1/ttx.1
 pyvenv.cfg
+Scripts/autopep8.exe
+Scripts/pycodestyle.exe
