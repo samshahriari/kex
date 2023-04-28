@@ -28,13 +28,6 @@ def get_pauli_x_median() -> float:
     return median(l)
 
 
-def get_readout_error() -> float:
-    l = []
-    for i in range(7):
-        l.append(backend_properties.readout_error(i))
-    return median(l)
-
-
 def get_SPAM_error() -> tuple[float, float]:
     m0p1 = []
     m1p0 = []
@@ -53,11 +46,12 @@ def get_thermal_error() -> tuple[float, float, float]:
     gate_time = []
     for i in range(7):
         t1.append(backend_properties.t1(i))
-        t2.append(backend_properties.t1(i))
+        t2.append(backend_properties.t2(i))
 
     coupling_map = [(0, 1), (1, 2), (1, 3), (3, 5), (4, 5), (5, 6)]
     for (x, y) in coupling_map:
         gate_time.append(backend_properties.gate_length('cx', [x, y]))
         gate_time.append(backend_properties.gate_length('cx', [y, x]))
 
-    return median(t1), median(t2), median(gate_time)
+    # TODO SKRIV VARFÖR
+    return median(t1)/10, median(t2)/10, median(gate_time)/10
